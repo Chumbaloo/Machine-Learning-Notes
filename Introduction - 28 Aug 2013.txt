@@ -1,0 +1,38 @@
+Machine Learning -- 28 Aug 2013
+-----------------------------------
+
+Supervised Learning:
+	Given an observation X, what is the best label y?
+	Features vs Predictors (ML vs Stats)
+	P(y|X)
+
+Unsupervised Learning:
+	"generative"
+	P(X)
+
+Semi-supervised Learning:
+	Lots of unlabeled data, some labels
+
+Reinforcement Learning:
+	For X, this is or is not the correct label
+	"you never know the consequences of the actions you didn't take"
+
+
+Y = f(x)
+Y could be a real number (regression) 
+
+
+Generally rows are observations
+
+Netflix problem:
+	people are rows, columns are their rankings for movies
+	for non-numeric labels, do repeated regressions on each label to determine which it belongs to
+
+errors, norms, loss functions
+	L2 norm = euclidean distance
+	L0 norm = yes or no
+
+For every function, what is it optimizing? What's your loss function?
+
+Machine learning vs. Statistics
+	much overlap- regression, probability, HMMs

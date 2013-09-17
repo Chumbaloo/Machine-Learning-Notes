@@ -1,0 +1,97 @@
+- Two interpretations of regression:
+
+  Linear:
+    y-hat = w*x
+  Bayesian (MLE & MAP):
+    y ~ N(w*x, \sigma^2)
+    argmax_w p(D|w)
+
+** Review slides on Linear Regression **
+
+In regression, we're always given X. Given X, what's the Y?
+
+MAP:
+  argmax \prod_{i=1}^n p(y_i | w, x_i) p(w) 
+MLE:
+  argmax \prod_{i=1}^n p(y_i | w, x_i)
+
+Estimating means for normal distribution:
+  We have a prior that y_i ~ N(\mu, \sigma^2)
+  We add a prior w ~ N(0, \gamma^2)
+  See the slides for how to use these priors
+
+- Constant Term in Linear Regression
+  Coding up things in Matlab, you generally need to add in a constant 
+  term... Something to watch for 
+
+- Linear Regression with Varying Noise
+  Different noise at each observation: Heteroscedasticicity
+  With every observation, different noise:
+    in the real world, the noise on more extreme measurements is often 
+    greater
+  
+    y_i ~ N(wx_i, \sigma_i^2)  <- note how sigma changes with _i
+  
+  Sometimes we know something about the noise, and then we can use
+  different sigmas at each point, assume independence among noise,
+  then plugging in eqn for Gaussian and simplifying
+  
+  This is called Weighted Regression
+  argmin_w [ \sum_{i = 1}^R (y_i - wx_i)/sigma_i^2
+  	  
+    I.e. you weigh noisy measurements less
+
+- Non-linear Regression 
+  Suppose you know that y is related to a function of x in such a way 
+  that the predicted values [lost slide]...  
+    y_i ~ N(\sqrt{w + x_i}, \sigma^2)
+
+  MLE: argmin_w \sum (y_i - \sqrt{w + x_i}_)^2 
+    Then use non-linear optimization techniques, of which many are 
+    available
+
+- Polynomial Regression
+  y = a + bx^2
+  Is this linear or nonlinear regression?
+    It is _linear_
+
+  We make a new variable:
+  z = [ 1 x_1^2 
+        1 x_2^2
+	...
+	1 x_n^2 ]
+ 
+  Now:
+    y_hat = z * w
+    and it is linear (linear in weights)
+    w = w*sin(x) <- linear estimation
+      sin(x) is a transformed feature, but still a feature
+      w is still linear
+    y = sin(wx) <- nonlinear estimation
+
+
+- Radial Basis Functions (RBF)
+  Often you have some really non-linear relationship between X and
+  Y. Can you do some transformation on these to make the relationship
+  linear? 
+
+  Let us choose a set of points on x:  z_1 ... z_k
+  For each point we will create a Gaussian distribution
+  z_j = exp(||x - \mu_j|| / sigma^2)
+
+  For every x, generate a bunch of Zs where the Zs near X will be
+  weighted heavily, and the Zs far from X will be zero
+
+  One adjustable parameter in this situation: the kernel width, or
+  \sigma. If the kernel width is really big, everything comes out. If
+  it is really narrow, then only very close things have an effect
+
+  Now the Xs are correlated, so we generally use a Ridge Regression
+  (MAP)
+
+  This method is LOESS
+
+Later: the use of kernels in regression
+
+
+  
